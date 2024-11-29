@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="/static/css/style.css">
+
+	<div id="wrap">
+		<header class="d-flex align-items-center">
+			<h1 class="ml-3">Memo</h1>
+		</header>
+		<section class="contents d-flex justify-content-center">
+			<div class="input-box my-5 p-5 rounded">
+				<h1 class="text-center">로그인</h1>
+				<input type="text" class="form-control mt-3" placeholder="아이디">
+				<input type="password" class="form-control mt-2" placeholder="비밀번호">
+				<button class= "btn btn-secondary btn-block mt-3" >가입</button>
+				<div class="text-center mt-4">
+					<a href="/user/join-view">회원가입</a>				
+				</div>
+			</div>
+		</section>
+		<footer class="d-flex justify-content-center align-items-center">
+			<div>Copyright 2024. Memo All Rights RESERVED.</div>
+		</footer>
+	</div>
+
+</body>
+</html>
