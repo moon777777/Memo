@@ -7,13 +7,48 @@
 		<section layout:fragment="contents" class="contents d-flex justify-content-center">
 			<div class="input-box my-5 p-5 rounded">
 				<h1 class="text-center">로그인</h1>
-				<input type="text" class="form-control mt-3" placeholder="아이디">
-				<input type="password" class="form-control mt-2" placeholder="비밀번호">
-				<button class= "btn btn-secondary btn-block mt-3">가입</button>
+				<input type="text" class="form-control mt-3" id="idInput" placeholder="아이디">
+				<input type="password" class="form-control mt-2" id="passwordInput" placeholder="비밀번호">
+				<button class= "btn btn-secondary btn-block mt-3" id="loginBtn">가입</button>
 				<div class="text-center mt-4">
 					<a href="/user/join-view">회원가입</a>				
 				</div>
 			</div>
 		</section>
+		
+		<script layout:fragment="script">
+			$(document).ready(function(){
+				$("#loginBtn").on("click", function(){
+					let id = $("#idInput").val();
+					let password = $("#passwordInput").val();
+					
+					if(id == "") {
+						alert("아이디를 입력하세요");
+						return;
+					}
+					
+					if(password == "") {
+						alert("비밀번호를 입력하세요");
+						return;
+					}
+					
+					$.ajax({
+						type:"post"
+						, url: "/user/login"
+						, data: {"loginId":id, "password":password}
+						, success:function(response) {
+							if(response.result == "success") {
+								alert("로그인 완료");
+							} else {
+								alert("일치하지 않는 정보입니다.");
+							}
+						}
+						, error:function() {
+							alert("로그인 에러");
+						}
+					});
+				});
+			});
+		</script>
 		
 </html>
