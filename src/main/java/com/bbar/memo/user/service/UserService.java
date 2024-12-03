@@ -3,6 +3,7 @@ package com.bbar.memo.user.service;
 import org.springframework.stereotype.Service;
 
 import com.bbar.memo.common.MD5HashingEncoder;
+import com.bbar.memo.user.domain.User;
 import com.bbar.memo.user.repository.UserRepository;
 
 @Service
@@ -30,6 +31,16 @@ public class UserService {
 		} else {
 			return false;
 		}
+		
+	}
+	
+	public User getUser(String loginId
+			, String password) {
+		
+		String endcodingPassword = MD5HashingEncoder.encode(password);
+		
+		return userRepository.selectUser(loginId, endcodingPassword);
+		
 		
 	}
 
