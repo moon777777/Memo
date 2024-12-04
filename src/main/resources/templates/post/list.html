@@ -4,8 +4,28 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{layout/default}">
         
-        <section layout:fragment="contents">
-        	<h2>메모 리스트</h2>
-        </section>
-
+        <section layout:fragment="contents" class="contents d-flex justify-content-center">
+        	<div class="input-memo">	
+        		<h2 class="text-center mt-5">메모 리스트</h2>
+	        	<table class="table table-bordered text-center mt-5">
+	        		<thead class="thead">
+	        			<tr>
+	        				<th>No</th>
+	        				<th>제목</th>
+	        				<th>작성날짜</th>
+	        			</tr>
+	        		</thead>
+	        		<tbody>
+	        			<tr>
+	        				<td>1</td>
+	        				<td>졸려</td>
+	        				<td>2024-12-04</td>
+	        			</tr>
+	        		</tbody>
+	        	</table>
+	        	<div class="d-flex justify-content-end mt-5">
+		        	<a href="/post/create-view" class="btn  btn-lg btn-secondary btn-end">메모 쓰기</a>	        	
+	        	</div>
+        	</div>
+		</section> 
 </html>

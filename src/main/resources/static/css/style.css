@@ -14,7 +14,16 @@ header {
 	background-color:#cccccc;
 }
 
+.contents > .input-memo {
+	width:700px;
+}
+
 footer {
 	height:70px;
 	background-color:#cccccc;
 }
+
+.thead {
+	background-color:#cccccc;
+}
+

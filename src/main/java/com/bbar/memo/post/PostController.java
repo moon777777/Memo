@@ -8,8 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/post")
 public class PostController {
 	
-	@GetMapping("list-view")
+	@GetMapping("/list-view")
 	public String MemoList() {
 		return "post/list";
+	}
+	
+	@GetMapping("/create-view")
+	public String createMemo() {
+		return "post/create";
 	}
 }
