@@ -1,6 +1,7 @@
 package com.bbar.memo.post.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -31,9 +32,20 @@ public class PostService {
 			return false;
 		}
 	}
-		  
-	public List<Post> getPostList() {
-		return postRepository.findAll();
+	
+	public List<Post> getPostList(int userId) {
+		return postRepository.findByUserIdOrderByIdDesc(userId);
+	}
+	
+	public Post getPost(int id) {
+		
+		Optional<Post> optionalPost = postRepository.findById(id);
+		
+		return optionalPost.orElse(null);
 	}
 
+	
+
+	
+	
 }

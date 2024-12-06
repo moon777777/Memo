@@ -7,8 +7,8 @@
         <section layout:fragment="contents" class="contents d-flex justify-content-center mb-5">
 			<div class="input-memo my-5">
 				<h2 class="text-center mt-3">메모 상세</h2>	
-				<input type="text" class="form-control mt-4" id="titleInput">
-				<textarea class="form-control mt-3" rows="10" id="contentInput"></textarea>
+				<input type="text" class="form-control mt-4" id="titleInput" th:value="${memo.title}">
+				<textarea class="form-control mt-3" rows="10" id="contentInput" th:text="${memo.contents}">메모 내용</textarea>
 				<div class="d-flex justify-content-between mt-4">
 					<button class="btn btn-lg btn-danger px-4" id="deleteBtn"> 삭제</button>
 					<div>

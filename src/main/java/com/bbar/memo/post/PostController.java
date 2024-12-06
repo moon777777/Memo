@@ -6,9 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bbar.memo.post.domain.Post;
 import com.bbar.memo.post.service.PostService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/post")
@@ -21,10 +24,13 @@ public class PostController {
 	}
 	
 	@GetMapping("/list-view")
-	public String MemoList(Model model) {
+	public String MemoList(Model model
+			, HttpSession session) {
 		
-		List<Post> memoList = postService.getPostList();
+		int userId = (Integer)session.getAttribute("userId");
 		
+		List<Post> memoList = postService.getPostList(userId);
+	
 		model.addAttribute("memoList", memoList);
 		
 		return "post/list";
@@ -36,12 +42,14 @@ public class PostController {
 	}
 	
 	@GetMapping("/detail-view")
-	public String MemoInfo(Model model) {
+	public String MemoInfo(@RequestParam("id") int id
+			, Model model) {
 		
-		List<Post> memoList = postService.getPostList();
+		Post memo = postService.getPost(id);
 		
-		model.addAttribute("memoList", memoList);
-		
-		return "post/info";
+		model.addAttribute("memo", memo);
+		    
+		    // 상세 정보를 보여줄 페이지로 리턴합니다.
+		 return "post/detail";
 	}
 }

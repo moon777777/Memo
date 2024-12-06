@@ -18,7 +18,7 @@
 	        		<tbody>
 	        			<tr th:each="memo:${memoList}">
 	        				<td th:text="${memo.id}">1</td>
-	        				<td th:text="${memo.title}"></td>
+	        				<td><a th:href="|/post/detail-view?id=${memo.id}|" class="text-dark" th:text="${memo.title}"></a></td>
 	        				<td th:text="${#temporals.format(memo.createdAt, 'yyyy-MM-dd')}">2024-12-04</td>
 	        			</tr>
 	        		</tbody>
