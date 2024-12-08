@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.bbar.memo.common.FileManager;
 import com.bbar.memo.post.domain.Post;
 import com.bbar.memo.post.repository.PostRepository;
 
@@ -17,16 +19,19 @@ public class PostService {
 		this.postRepository = postRepository;
 	}
 	
-	public boolean addPost(int userId, String title, String contents) {
+	public boolean addPost(int userId, String title, String contents, MultipartFile file) {
+		
+		String imagePath = FileManager.savaFile(userId, file);
 		
 		Post post = Post.builder()
 		.userId(userId)
 		.title(title)
 		.contents(contents)
+		.imagePath(imagePath)
 		.build();
 		
 		try {
-			Post result = postRepository.save(post);
+			postRepository.save(post);
 			return true;
 		} catch(Exception e) {
 			return false;
