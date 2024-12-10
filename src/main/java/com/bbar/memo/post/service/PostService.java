@@ -31,7 +31,7 @@ public class PostService {
 		.build();
 		
 		try {
-			postRepository.save(post);
+			postRepository.save(post);	
 			return true;
 		} catch(Exception e) {
 			return false;

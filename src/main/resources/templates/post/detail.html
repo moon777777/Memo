@@ -5,7 +5,7 @@
         layout:decorate="~{layout/default}">
         
         <section layout:fragment="contents" class="contents d-flex justify-content-center mb-5">
-			<div class="input-memo my-5">
+			<div class="input-memo my-5" >
 				<h2 class="text-center mt-3">메모 상세</h2>	
 				<input type="text" class="form-control mt-4" id="titleInput" th:value="${memo.title}">
 				<textarea class="form-control mt-3" rows="10" id="contentInput" th:text="${memo.contents}">메모 내용</textarea>
