@@ -4,20 +4,83 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{layout/default}">
         
-        <section layout:fragment="contents" class="contents d-flex justify-content-center mb-5">
-			<div class="input-memo my-5" >
+        <section layout:fragment="contents" class="contents d-flex justify-content-center mb-5" >
+			<div id="memoContents" class="input-memo my-5" th:data-post-id="${memo.id}">
 				<h2 class="text-center mt-3">메모 상세</h2>	
 				<input type="text" class="form-control mt-4" id="titleInput" th:value="${memo.title}">
-				<textarea class="form-control mt-3" rows="10" id="contentInput" th:text="${memo.contents}">메모 내용</textarea>
+				<textarea class="form-control mt-3" rows="10" id="contentsInput" th:text="${memo.contents}">메모 내용</textarea>
 				<img th:src="${memo.imagePath}">
 				<div class="d-flex justify-content-between mt-4">
 					<button class="btn btn-lg btn-danger px-4" id="deleteBtn"> 삭제</button>
 					<div>
 						<a href="/post/list-view" class="btn btn-lg btn-secondary btn-form">목록으로</a>
-						<button class="btn btn-lg btn-secondary ml-2 px-4"> 수정</button>								
+						<button class="btn btn-lg btn-secondary ml-2 px-4" id="updateBtn"> 수정</button>								
 					</div>		
 				</div>
 			</div>
 		</section>
+		
+		<script layout:fragment="script">
+			$(document).ready(function(){
+				
+				$("#deleteBtn").on("click", function(){
+					
+					let id = $("#memoContents").data("post-id");
+					
+					$.ajax({
+						type:"delete"
+						, url:"/post/delete"
+						, data:{"id":id}
+						, success:function(response) {
+						if(response.result == "success") {
+							location.href="/post/list-view";
+						} else {
+							alert("삭제 실패");
+						}
+					}
+					, error:function() {
+						alert("삭제 에러");
+					}
+					});
+				});
+				
+				$("#updateBtn").on("click", function(){
+					
+					let title = $("#titleInput").val();
+					let contents = $("#contentsInput").val();
+					
+					if(title == "") {
+						alert("제목을 입력해주세요");
+						return;
+					}
+					
+					if(contents == "") {
+						alert("내용을 입력해주세요");
+						return;
+					}
+					
+					let id = $("#memoContents").data("post-id");
+					
+					$.ajax({
+						type: "put"
+						, url:"/post/update"
+						, data:{"id":id, "title":title, "contents":contents}
+						, success:function(response) {
+							if(response.result == "success") {
+								location.reload();
+							} else {
+								alert("수정 실패");
+							}
+						}
+						, error:function() {
+							alert("수정 에러");
+						}
+						
+					});
+				});
+			});
+		
+		</script>
+		
 
 </html>

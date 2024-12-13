@@ -15,6 +15,10 @@ public class FileManager {
 	
 	public static String savaFile(int userId, MultipartFile file) {
 		
+		if(file == null) {
+			return null;
+		}
+		
 		// 파일 이름 유지
 		// 같은 이름의 파일이 전달 될 경우를 대비해서 디렉토리를 마늘어서 파일 저장
 		// 디렉토리 이름에 사용자 정보 포함
@@ -56,9 +60,34 @@ public class FileManager {
 		// C:\\Moon777\\SpringProject\\upload\\memo\\파일이름 <- 이게 실제 경로
 		// 너무 복잡하니 images/파일이름.png 이걸로 매칭시켜 경로로 설정
 		
-		return "/images" + directoryName + "/" + file.getOriginalFilename();
+		return "/images" + directoryName + "/" + file.getOriginalFilename();	
+	}
+	
+	public static boolean removeFile(String filePath) { // /image/2_234545309/test.png // static 객체생성없이 쓰려고 붙임
+		// /C:\\Moon777\\SpringProject\\upload\\memo/2_234545309/test.png 요렇게 바꾸자
 		
+		if(filePath == null) {
+			return false;
+		}
 		
+		String fullFilePath = FILE_UPLOAD_PATH + filePath.replace("/images", "");
+		
+		Path path = Paths.get(fullFilePath);
+		
+		// 디렉토리 경로 /C:\\Moon777\\SpringProject\\upload\\memo/2_234545309
+		Path directoryPath = path.getParent();
+		
+		try {
+			Files.delete(path);
+			Files.delete(directoryPath);
+			
+			return true;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return false;
+		}
 	}
 
 }
